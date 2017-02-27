@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="a9a65674-f411-438f-b4d6-2ffaa6ec956e" activeEnvironment="Default" name="Bank" resourceRoot="" soapui-version="5.2.1" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" id="bb17f051-79d1-4003-93c1-fbf343b3383e" wsaVersion="NONE" name="BankBinding" type="wsdl" bindingName="{http://it.univaq.disim.sose.project/bank}BankBinding" soapVersion="1_1" anonymous="optional" definition="file:/home/stephane/Dev/WebService/Project/bank/src/main/resources/bank.wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="file:/home/stephane/Dev/WebService/Project/bank/src/main/resources/bank.wsdl"><con:part><con:url>file:/home/stephane/Dev/WebService/Project/bank/src/main/resources/bank.wsdl</con:url><con:content><![CDATA[<definitions name="PBankService" targetNamespace="http://it.univaq.disim.sose.project/bank" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:tns="http://it.univaq.disim.sose.project/bank" xmlns:wsp1_2="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata">
+  <types>
+    <xsd:schema targetNamespace="http://it.univaq.disim.sose.project/bank">
+      <xsd:element name="accountRequest" type="tns:accountRequest"/>
+      <xsd:element name="accountResponse" type="tns:accountResponse"/>
+      <xsd:element name="withdrawRequest" type="tns:withdrawRequest"/>
+      <xsd:element name="withdrawResponse" type="tns:withdrawResponse"/>
+      <xsd:element name="refillRequest" type="tns:refillRequest"/>
+      <xsd:element name="refillResponse" type="tns:refillResponse"/>
+      <xsd:complexType name="addressType">
+        <xsd:sequence>
+          <xsd:element name="street" type="xsd:string"/>
+          <xsd:element name="city" type="xsd:string"/>
+          <xsd:element name="country" type="xsd:string"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="nameType">
+        <xsd:sequence>
+          <xsd:element name="firstname" type="xsd:string"/>
+          <xsd:element name="lastname" type="xsd:string"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="loginType">
+        <xsd:sequence>
+          <xsd:element name="username" type="xsd:string"/>
+          <xsd:element name="password" type="xsd:string"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="resultType">
+        <xsd:sequence>
+          <xsd:element name="success" type="xsd:boolean"/>
+          <xsd:element name="result" type="xsd:string"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="accountRequest">
+        <xsd:all>
+          <xsd:element name="account" type="tns:loginType"/>
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="accountResponse">
+        <xsd:all>
+          <xsd:element name="amount" type="xsd:double"/>
+          <xsd:element name="name" type="tns:nameType"/>
+          <xsd:element name="address" type="tns:addressType"/>
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="withdrawRequest">
+        <xsd:all>
+          <xsd:element name="account" type="tns:loginType"/>
+          <xsd:element name="amount" type="xsd:double"/>
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="withdrawResponse">
+        <xsd:all>
+          <xsd:element name="result" type="tns:resultType"/>
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="refillRequest">
+        <xsd:all>
+          <xsd:element name="account" type="tns:loginType"/>
+          <xsd:element name="amount" type="xsd:double"/>
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="refillResponse">
+        <xsd:all>
+          <xsd:element name="result" type="tns:resultType"/>
+        </xsd:all>
+      </xsd:complexType>
+    </xsd:schema>
+  </types>
+  <message name="accountRequest">
+    <part name="parameters" element="tns:accountRequest"></part>
+  </message>
+  <message name="accountResponse">
+    <part name="parameters" element="tns:accountResponse"></part>
+  </message>
+  <message name="withdrawRequest">
+    <part name="parameters" element="tns:withdrawRequest"/>
+  </message>
+  <message name="withdrawResponse">
+    <part name="parameters" element="tns:withdrawResponse"/>
+  </message>
+  <message name="refillRequest">
+    <part name="parameters" element="tns:refillRequest"/>
+  </message>
+  <message name="refillResponse">
+    <part name="parameters" element="tns:refillResponse"/>
+  </message>
+  <portType name="BankPT">
+    <operation name="account">
+      <input message="tns:accountRequest" wsam:Action="http://it.univaq.disim.sose.project/bank/account"></input>
+      <output message="tns:accountResponse" wsam:Action="http://it.univaq.disim.sose.project/bank/accountResponse"></output>
+    </operation>
+    <operation name="withdraw">
+      <input message="tns:withdrawRequest" wsam:Action="http://it.univaq.disim.sose.project/bank/withdraw"></input>
+      <output message="tns:withdrawResponse" wsam:Action="http://it.univaq.disim.sose.project/bank/withdrawResponse"></output>
+    </operation>
+    <operation name="refill">
+      <input message="tns:refillRequest" wsam:Action="http://it.univaq.disim.sose.project/bank/refill"></input>
+      <output message="tns:refillResponse" wsam:Action="http://it.univaq.disim.sose.project/bank/refillResponse"></output>
+    </operation>
+  </portType>
+  <binding name="BankBinding" type="tns:BankPT">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <operation name="account">
+      <soap:operation soapAction=""/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="withdraw">
+      <soap:operation soapAction=""/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="refill">
+      <soap:operation soapAction=""/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+  </binding>
+  <service name="BankService">
+    <port name="BankPort" binding="tns:BankBinding">
+      <soap:address location="http://localhost:8080/bank/services/bank"/>
+    </port>
+  </service>
+</definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://localhost:8080/bank/services/bank</con:endpoint></con:endpoints><con:operation id="ff79580f-c351-416e-a3fd-a20fa63bc50c" isOneWay="false" action="" name="account" bindingOperationName="account" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="d79a9598-6afa-41cb-8817-f42bf0d79f6e" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/bank/services/bank</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:bank="http://it.univaq.disim.sose.project/bank">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <bank:accountRequest>
+         <account>
+            <username>test2</username>
+            <password>test2</password>
+         </account>
+      </bank:accountRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://it.univaq.disim.sose.project/bank/account"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="cae46fd6-ead4-4cfb-9f14-3a2087ca07c9" isOneWay="false" action="" name="refill" bindingOperationName="refill" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="5e664350-5cfe-45e9-9c46-df04fa341666" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/bank/services/bank</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:bank="http://it.univaq.disim.sose.project/bank">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <bank:refillRequest>
+         <!--You may enter the following 2 items in any order-->
+         <account>
+            <username>test2</username>
+            <password>test2</password>
+         </account>
+         <amount> 100000 </amount>
+      </bank:refillRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://it.univaq.disim.sose.project/bank/refill"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="fd6dc6d4-794b-4a60-80d0-a6b06ee4fa0b" isOneWay="false" action="" name="withdraw" bindingOperationName="withdraw" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="1fd97714-db87-4872-b11e-895a699594a7" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/bank/services/bank</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:bank="http://it.univaq.disim.sose.project/bank">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <bank:withdrawRequest>
+         <!--You may enter the following 2 items in any order-->
+         <account>
+            <username>test2</username>
+            <password>test2</password>
+         </account>
+         <amount>10</amount>
+      </bank:withdrawRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://it.univaq.disim.sose.project/bank/withdraw"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/></con:soapui-project>

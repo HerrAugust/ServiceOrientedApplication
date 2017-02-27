@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="a38c3918-f1ac-467d-8e4a-c1e29716cf2c" activeEnvironment="Default" name="Product" resourceRoot="" soapui-version="5.2.1" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" id="c89b55db-13b7-40fe-96f4-bdb4aae5af6a" wsaVersion="NONE" name="ProductBinding" type="wsdl" bindingName="{http://it.univaq.disim.sose.project/product}ProductBinding" soapVersion="1_1" anonymous="optional" definition="file:/home/stephane/Dev/WebService/Project/product/src/main/resources/product.wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="file:/home/stephane/Dev/WebService/Project/product/src/main/resources/product.wsdl"><con:part><con:url>file:/home/stephane/Dev/WebService/Project/product/src/main/resources/product.wsdl</con:url><con:content><![CDATA[<definitions name="PProductService" targetNamespace="http://it.univaq.disim.sose.project/product" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:tns="http://it.univaq.disim.sose.project/product" xmlns:wsp1_2="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata">
+  <types>
+    <xsd:schema targetNamespace="http://it.univaq.disim.sose.project/product">
+      <xsd:element name="allProductsRequest" type="tns:allProductsRequest"/>
+      <xsd:element name="allProductsResponse" type="tns:allProductsResponse"/>
+      <xsd:element name="productRequest" type="tns:productRequest"/>
+      <xsd:element name="productResponse" type="tns:productResponse"/>
+      <xsd:complexType name="ProductType">
+        <xsd:sequence>
+          <xsd:element name="id" type="xsd:int"/>
+          <xsd:element name="name" type="xsd:string"/>
+          <xsd:element name="description" type="xsd:string"/>
+          <xsd:element name="remaining_quantity">
+            <!--Non-negative integer-->
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:int">
+                <xsd:minInclusive value="0"/>
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+          <xsd:element name="unit_price">
+            <!--Non-negative double-->
+            <xsd:simpleType>
+              <xsd:restriction base="xsd:double">
+                <xsd:minInclusive value="0"/>
+              </xsd:restriction>
+            </xsd:simpleType>
+          </xsd:element>
+          <xsd:element name="image" type="xsd:string"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="allProductsRequest"></xsd:complexType>
+      <xsd:complexType name="allProductsResponse">
+        <xsd:sequence maxOccurs="unbounded" minOccurs="0">
+          <xsd:element name="products" type="tns:ProductType"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="productRequest">
+        <xsd:all>
+          <xsd:element name="id" type="xsd:int"/>
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="productResponse">
+        <xsd:all>
+          <xsd:element name="product" type="tns:ProductType"/>
+        </xsd:all>
+      </xsd:complexType>
+    </xsd:schema>
+  </types>
+  <message name="allProductsRequest">
+    <part name="parameters" element="tns:allProductsRequest"></part>
+  </message>
+  <message name="allProductsResponse">
+    <part name="parameters" element="tns:allProductsResponse"></part>
+  </message>
+  <message name="productRequest">
+    <part name="parameters" element="tns:productRequest"/>
+  </message>
+  <message name="productResponse">
+    <part name="parameters" element="tns:productResponse"/>
+  </message>
+  <portType name="ProductPT">
+    <operation name="allProducts">
+      <input message="tns:allProductsRequest" wsam:Action="http://it.univaq.disim.sose.project/product/allProducts"></input>
+      <output message="tns:allProductsResponse" wsam:Action="http://it.univaq.disim.sose.project/product/allProductsResponse"></output>
+    </operation>
+    <operation name="product">
+      <input message="tns:productRequest" wsam:Action="http://it.univaq.disim.sose.project/product/product"></input>
+      <output message="tns:productResponse" wsam:Action="http://it.univaq.disim.sose.project/product/productResponse"></output>
+    </operation>
+  </portType>
+  <binding name="ProductBinding" type="tns:ProductPT">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <operation name="allProducts">
+      <soap:operation soapAction=""/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="product">
+      <soap:operation soapAction=""/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+  </binding>
+  <service name="ProductService">
+    <port name="ProductPort" binding="tns:ProductBinding">
+      <soap:address location="http://localhost:8080/product/services/product"/>
+    </port>
+  </service>
+</definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://localhost:8080/product/services/product</con:endpoint></con:endpoints><con:operation id="140ed6ee-96dc-4c6f-b0ce-753a498facc0" isOneWay="false" action="" name="allProducts" bindingOperationName="allProducts" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="979ad525-3a20-4175-87b0-6c00ebf7b677" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/product/services/product</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:prod="http://it.univaq.disim.sose.project/product">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <prod:allProductsRequest/>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://it.univaq.disim.sose.project/product/allProducts"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="00b4335c-018f-4903-bcdc-7e500b71b346" isOneWay="false" action="" name="product" bindingOperationName="product" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="dee6933c-576b-449d-a0a7-f75b907ab956" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/product/services/product</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:prod="http://it.univaq.disim.sose.project/product">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <prod:productRequest>
+         <id>2</id>
+      </prod:productRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://it.univaq.disim.sose.project/product/product"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/></con:soapui-project>

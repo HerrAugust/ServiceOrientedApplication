@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions name="PProductService"
+	targetNamespace="http://it.univaq.disim.sose.project/product" 
+	xmlns="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:wsp="http://www.w3.org/ns/ws-policy" 
+	xmlns:tns="http://it.univaq.disim.sose.project/product"
+	xmlns:wsp1_2="http://schemas.xmlsoap.org/ws/2004/09/policy"
+	xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata">
+	<types>
+		<xsd:schema targetNamespace="http://it.univaq.disim.sose.project/product">			
+			<xsd:element name="allProductsRequest" type="tns:allProductsRequest" />
+			<xsd:element name="allProductsResponse" type="tns:allProductsResponse" />			
+			<xsd:element name="productRequest" type="tns:productRequest" />
+			<xsd:element name="productResponse" type="tns:productResponse" />
+			<xsd:element name="updateRequest" type="tns:updateRequest" />		
+			<xsd:complexType name="ProductType">
+				<xsd:sequence>
+					<xsd:element name="id" type="xsd:int" />
+					<xsd:element name="name" type="xsd:string" />
+					<xsd:element name="description" type="xsd:string" />
+					<xsd:element name="remaining_quantity">
+						<!-- Non-negative integer -->
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:int">
+								<xsd:minInclusive value="0" />
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+					<xsd:element name="unit_price">
+						<!-- Non-negative double -->
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:double">
+								<xsd:minInclusive value="0" />
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+					<xsd:element name="image" type="xsd:string" />
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="allProductsRequest">
+			</xsd:complexType>			
+			<xsd:complexType name="allProductsResponse">
+				<xsd:sequence maxOccurs="unbounded" minOccurs="0">
+					<xsd:element name="products" type="tns:ProductType" />
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="productRequest">
+				<xsd:all>
+					<xsd:element name="id" type="xsd:int" />
+				</xsd:all>
+			</xsd:complexType>			
+			<xsd:complexType name="productResponse">
+				<xsd:all>
+					<xsd:element name="product" type="tns:ProductType" />
+				</xsd:all>
+			</xsd:complexType>	
+			<xsd:complexType name="updateRequest">
+				<xsd:all>
+					<xsd:element name="product" type="tns:ProductType" />
+				</xsd:all>
+			</xsd:complexType>	
+        </xsd:schema>
+	</types>	
+	<message name="allProductsRequest">
+		<part name="parameters" element="tns:allProductsRequest"> </part>
+	</message>
+	<message name="allProductsResponse">
+		<part name="parameters" element="tns:allProductsResponse">
+		</part>
+	</message>
+	<message name="productRequest">
+		<part name="parameters" element="tns:productRequest"></part>
+	</message>
+	<message name="productResponse">
+		<part name="parameters" element="tns:productResponse"></part>
+	</message>
+	<message name="updateRequest">
+		<part name="parameters" element="tns:updateRequest"></part>
+	</message>
+	<portType name="ProductPT">
+		<operation name="allProducts">
+			<input message="tns:allProductsRequest"
+				wsam:Action="http://it.univaq.disim.sose.project/product/allProducts">
+			</input>
+			<output message="tns:allProductsResponse"
+				wsam:Action="http://it.univaq.disim.sose.project/product/allProductsResponse">
+			</output>
+		</operation>
+		<operation name="product">
+			<input message="tns:productRequest"
+				wsam:Action="http://it.univaq.disim.sose.project/product/product">
+			</input>
+			<output message="tns:productResponse"
+				wsam:Action="http://it.univaq.disim.sose.project/product/productResponse">
+			</output>
+		</operation>
+		<operation name="update">
+			<input message="tns:updateRequest"
+				wsam:Action="http://it.univaq.disim.sose.project/product/update">
+			</input>
+		</operation>
+	</portType>
+	<binding name="ProductBinding" type="tns:ProductPT">
+		<soap:binding style="document"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+		<operation name="allProducts">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+		</operation>
+		<operation name="product">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+		</operation>
+		<operation name="update">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+		</operation>
+	</binding>
+	<service name="ProductService">
+		<port name="ProductPort" binding="tns:ProductBinding">
+			<soap:address location="http://localhost:8080/product/services/product" />
+		</port>
+	</service>
+</definitions>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="0bc1985c-3368-455f-9ae9-59ff80bc7dec" activeEnvironment="Default" name="Currency" resourceRoot="" soapui-version="5.2.1" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" id="fd42eef6-0d35-4da9-923c-5d843b78211d" wsaVersion="NONE" name="CurrencyBinding" type="wsdl" bindingName="{http://it.univaq.disim.sose.project/currency}CurrencyBinding" soapVersion="1_1" anonymous="optional" definition="file:/home/stephane/Dev/WebService/Project/currency/src/main/resources/currency.wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="file:/home/stephane/Dev/WebService/Project/currency/src/main/resources/currency.wsdl"><con:part><con:url>file:/home/stephane/Dev/WebService/Project/currency/src/main/resources/currency.wsdl</con:url><con:content><![CDATA[<definitions name="PCurrencyService" targetNamespace="http://it.univaq.disim.sose.project/currency" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:tns="http://it.univaq.disim.sose.project/currency" xmlns:wsp1_2="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata">
+  <types>
+    <xsd:schema targetNamespace="http://it.univaq.disim.sose.project/currency">
+      <xsd:element name="rateRequest" type="tns:rateRequest"/>
+      <xsd:element name="rateResponse" type="tns:rateResponse"/>
+      <xsd:simpleType name="currencyType">
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="EUR"/>
+          <xsd:enumeration value="USD"/>
+          <xsd:enumeration value="GBP"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:complexType name="rateRequest">
+        <xsd:sequence>
+          <xsd:element name="from" type="tns:currencyType"/>
+          <xsd:element name="to" type="tns:currencyType"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="rateResponse">
+        <xsd:sequence>
+          <xsd:element name="rate" type="xsd:double"/>
+        </xsd:sequence>
+      </xsd:complexType>
+    </xsd:schema>
+  </types>
+  <message name="rateRequest">
+    <part name="parameters" element="tns:rateRequest"></part>
+  </message>
+  <message name="rateResponse">
+    <part name="parameters" element="tns:rateResponse"></part>
+  </message>
+  <portType name="CurrencyPT">
+    <operation name="rate">
+      <input message="tns:rateRequest" wsam:Action="http://it.univaq.disim.sose.project/currency/rate"></input>
+      <output message="tns:rateResponse" wsam:Action="http://it.univaq.disim.sose.project/currency/rateResponse"></output>
+    </operation>
+  </portType>
+  <binding name="CurrencyBinding" type="tns:CurrencyPT">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <operation name="rate">
+      <soap:operation soapAction=""/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+  </binding>
+  <service name="CurrencyService">
+    <port name="CurrencyPort" binding="tns:CurrencyBinding">
+      <soap:address location="http://localhost:8080/currency/services/currency"/>
+    </port>
+  </service>
+</definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://localhost:8080/currency/services/currency</con:endpoint><con:endpoint>http://localhost:8080/currency/services/delivery</con:endpoint></con:endpoints><con:operation id="21792f8d-f8cb-453b-8745-a1bd69083f14" isOneWay="false" action="" name="rate" bindingOperationName="rate" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="dae50522-ae92-407c-8bec-1d222e564058" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/currency/services/currency</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cur="http://it.univaq.disim.sose.project/currency">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <cur:rateRequest>
+         <from>EUR</from>
+         <to>GBP</to>
+      </cur:rateRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://it.univaq.disim.sose.project/currency/rate"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/></con:soapui-project>

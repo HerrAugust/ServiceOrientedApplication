@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions name="PDeliveryService"
+	targetNamespace="http://it.univaq.disim.sose.project/delivery" 
+	xmlns="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:wsp="http://www.w3.org/ns/ws-policy" 
+	xmlns:tns="http://it.univaq.disim.sose.project/delivery"
+	xmlns:wsp1_2="http://schemas.xmlsoap.org/ws/2004/09/policy"
+	xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata">
+	<types>
+		<xsd:schema targetNamespace="http://it.univaq.disim.sose.project/delivery">			
+			<xsd:element name="deliveryFeeRequest" type="tns:deliveryFeeRequest" />
+			<xsd:element name="deliveryFeeResponse" type="tns:deliveryFeeResponse" />
+			<xsd:complexType name="addressType">
+			  <xsd:sequence>
+			    <xsd:element name="street" type="xsd:string"/>
+			    <xsd:element name="city" type="xsd:string"/>
+			    <xsd:element name="country" type="xsd:string"/>
+			  </xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="deliveryFeeRequest">
+				<xsd:sequence>
+					<xsd:element name="origin" type="tns:addressType" />
+					<xsd:element name="destination" type="tns:addressType" />
+				</xsd:sequence>
+			</xsd:complexType>			
+			<xsd:complexType name="deliveryFeeResponse">
+				<xsd:sequence>
+					<xsd:element name="deliveryFee" type="xsd:double" />
+				</xsd:sequence>
+			</xsd:complexType>	
+        </xsd:schema>
+	</types>	
+	<message name="deliveryFeeRequest">
+		<part name="parameters" element="tns:deliveryFeeRequest">
+		</part>
+	</message>
+	<message name="deliveryFeeResponse">
+		<part name="parameters" element="tns:deliveryFeeResponse">
+		</part>
+	</message>
+	<portType name="DeliveryPT">
+		<operation name="deliveryFee">
+			<input message="tns:deliveryFeeRequest"
+				wsam:Action="http://it.univaq.disim.sose.project/delivery/deliveryFee">
+			</input>
+			<output message="tns:deliveryFeeResponse"
+				wsam:Action="http://it.univaq.disim.sose.project/delivery/deliveryFeeResponse">
+			</output>
+		</operation>
+	</portType>
+	<binding name="DeliveryBinding" type="tns:DeliveryPT">
+		<soap:binding style="document"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+		<operation name="deliveryFee">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+		</operation>
+	</binding>
+	<service name="DeliveryService">
+		<port name="DeliveryPort" binding="tns:DeliveryBinding">
+			<soap:address location="http://localhost:8080/delivery/services/delivery" />
+		</port>
+	</service>
+</definitions>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <title> Shop Web Client </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/semantic.min.css">
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="img/favicon.png">
+  </head>
+
+  <body class="ui container">
+
+		<!-- Header !-->
+		<div id="header" class="ui large top fixed borderless menu">
+			<a class="item" href="#">
+			  <img src="img/logo.png">
+				Shop
+			</a>
+			<a class="item" href="#products">
+			  Catalog
+			</a>
+			<a class="item" href="#account">
+			  Account
+			</a>
+			<div class="right floated item" id="currency">
+			  EUR
+			</div>       
+		</div>
+		
+		<header> </header>
+
+		<!-- Page Content -->
+		<div id="app" class="ui container" style="margin-top: 80px;">
+			<router-view></router-view>
+		</div>
+
+		<!-- Footer -->
+		<div id="footer">
+			<div class="ui divider"></div>
+			<div class="ui horizontal list">
+				<span class="disabled item" href="#"> © VANBERG Stéphane </span>
+			</div>
+		</div>
+
+		<!-- JS -->
+		<script src="js/vue-resource.min.js"></script>
+		<script src="js/vue-router.js"></script>
+		<script src="js/vue.js"></script>
+		<script src="js/app.js"></script>
+
+  </body>
+
+</html>

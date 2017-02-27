@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="d9fbfe5f-bcf8-4a66-9cf0-438dfdddab63" activeEnvironment="Default" name="delivery" resourceRoot="" soapui-version="5.2.1" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" id="01d7cbd9-150b-4fe2-b914-6e78701d4eff" wsaVersion="NONE" name="DeliveryBinding" type="wsdl" bindingName="{http://it.univaq.disim.sose.project/delivery}DeliveryBinding" soapVersion="1_1" anonymous="optional" definition="file:/home/stephane/Dev/WebService/Project/delivery/src/main/resources/delivery.wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="file:/home/stephane/Dev/WebService/Project/delivery/src/main/resources/delivery.wsdl"><con:part><con:url>file:/home/stephane/Dev/WebService/Project/delivery/src/main/resources/delivery.wsdl</con:url><con:content><![CDATA[<definitions name="PDeliveryService" targetNamespace="http://it.univaq.disim.sose.project/delivery" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:tns="http://it.univaq.disim.sose.project/delivery" xmlns:wsp1_2="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata">
+  <types>
+    <xsd:schema targetNamespace="http://it.univaq.disim.sose.project/delivery">
+      <xsd:element name="deliveryFeeRequest" type="tns:deliveryFeeRequest"/>
+      <xsd:element name="deliveryFeeResponse" type="tns:deliveryFeeResponse"/>
+      <xsd:complexType name="addressType">
+        <xsd:sequence>
+          <xsd:element name="street" type="xsd:string"/>
+          <xsd:element name="city" type="xsd:string"/>
+          <xsd:element name="country" type="xsd:string"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="deliveryFeeRequest">
+        <xsd:sequence>
+          <xsd:element name="origin" type="tns:addressType"/>
+          <xsd:element name="destination" type="tns:addressType"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="deliveryFeeResponse">
+        <xsd:sequence>
+          <xsd:element name="deliveryFee" type="xsd:double"/>
+        </xsd:sequence>
+      </xsd:complexType>
+    </xsd:schema>
+  </types>
+  <message name="deliveryFeeRequest">
+    <part name="parameters" element="tns:deliveryFeeRequest"></part>
+  </message>
+  <message name="deliveryFeeResponse">
+    <part name="parameters" element="tns:deliveryFeeResponse"></part>
+  </message>
+  <portType name="DeliveryPT">
+    <operation name="deliveryFee">
+      <input message="tns:deliveryFeeRequest" wsam:Action="http://it.univaq.disim.sose.project/delivery/deliveryFee"></input>
+      <output message="tns:deliveryFeeResponse" wsam:Action="http://it.univaq.disim.sose.project/delivery/deliveryFeeResponse"></output>
+    </operation>
+  </portType>
+  <binding name="DeliveryBinding" type="tns:DeliveryPT">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <operation name="deliveryFee">
+      <soap:operation soapAction=""/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+  </binding>
+  <service name="DeliveryService">
+    <port name="DeliveryPort" binding="tns:DeliveryBinding">
+      <soap:address location="http://localhost:8080/delivery/services/delivery"/>
+    </port>
+  </service>
+</definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://localhost:8080/delivery/services/delivery</con:endpoint></con:endpoints><con:operation id="5eb50661-8642-4d71-b15b-6edd56f2dc25" isOneWay="false" action="" name="deliveryFee" bindingOperationName="deliveryFee" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="47800705-44d3-4c17-a08e-94094e336369" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/delivery/services/delivery</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:del="http://it.univaq.disim.sose.project/delivery">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <del:deliveryFeeRequest>
+         <origin>
+            <street>?</street>
+            <city>?</city>
+            <country>Belgium</country>
+         </origin>
+         <destination>
+            <street>?</street>
+            <city>?</city>
+            <country>Italy</country>
+         </destination>
+      </del:deliveryFeeRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://it.univaq.disim.sose.project/delivery/deliveryFee"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/></con:soapui-project>
